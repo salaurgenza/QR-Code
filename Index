@@ -7,8 +7,8 @@
     body {
       font-family: Arial, sans-serif;
       padding: 30px;
-      background-color: #f9f9f9;
       text-align: center;
+      background-color: #f4f4f4;
     }
     input {
       width: 300px;
@@ -17,8 +17,8 @@
     }
     button {
       padding: 10px 20px;
-      font-size: 16px;
       margin-left: 10px;
+      font-size: 16px;
       cursor: pointer;
     }
     #qrcode {
@@ -34,16 +34,16 @@
 
   <div id="qrcode"></div>
 
-  <!-- Libreria QRCode.js -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <!-- Inclusione locale della libreria QRCode -->
+  <script src="qrcode.min.js"></script>
 
   <script>
     function generaQRCode() {
-      const link = document.getElementById("linkInput").value;
+      const link = document.getElementById("linkInput").value.trim();
       const qrcodeDiv = document.getElementById("qrcode");
       qrcodeDiv.innerHTML = ""; // Pulisce eventuali QR precedenti
 
-      if (link.trim() !== "") {
+      if (link !== "") {
         new QRCode(qrcodeDiv, {
           text: link,
           width: 200,
@@ -53,6 +53,11 @@
         alert("Inserisci un link valido.");
       }
     }
+  </script>
+
+</body>
+</html>
+
   </script>
 
 </body>
