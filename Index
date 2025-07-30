@@ -1,64 +1,74 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Generatore QR Code</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      text-align: center;
-      background-color: #f4f4f4;
-    }
-    input {
-      width: 300px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-left: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    #qrcode {
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Generatore Codice a Barre (Offline)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #barcode {
+            margin-top: 30px;
+        }
+
+        svg {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 
-  <h2>Generatore di QR Code</h2>
-  <input type="text" id="linkInput" placeholder="Inserisci un link...">
-  <button onclick="generaQRCode()">Genera</button>
+    <h2>Generatore di Codice a Barre (Offline)</h2>
+    <input type="text" id="barcodeInput" placeholder="Inserisci testo o numeri...">
+    <button onclick="generaBarcode()">Genera</button>
 
-  <div id="qrcode"></div>
+    <div id="barcode">
+        <svg id="barcodeSvg"></svg>
+    </div>
 
-  <!-- Inclusione locale della libreria QRCode -->
-  <script src="qrcode.min.js"></script>
+    <!-- Libreria JsBarcode embedded completa -->
+    <script>/*!
+        * JsBarcode v3.11.5 - CODE128 support only
+        * https://github.com/lindell/JsBarcode
+        */
+        !function (t, e) { "object" == typeof exports && "undefined" != typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define(e) : (t = "undefined" != typeof globalThis ? globalThis : t || self).JsBarcode = e() }(this, (function () { "use strict"; function t(t, e) { return function () { return e.apply(t, arguments) } } function e(t, e) { if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function") } function r(t, e) { for (var r = 0; r < e.length; r++) { var n = e[r]; n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(t, n.key, n) } } function n(t, e, n) { return e && r(t.prototype, e), n && r(t, n), t } function o(t, e) { var r = ""; t.split("").forEach((function (t) { r += e[t] || "" })); return r } function i(t) { return o(t, a) } var a = { " ": "11011001100", "!": "11001101100", '"': "11001100110", "#": "10010011000", "$": "10010001100", "%": "10001001100", "&": "10011001000", "'": "10011000100", "(": "10001100100", ")": "11001001000", "*": "11001000100", "+": "11000100100", ",": "10110011100", "-": "10011011100", ".": "10011001110", "/": "10111001100", "0": "10011101100", "1": "10011100110", "2": "11001110010", "3": "11001011100", "4": "11001001110", "5": "11011100100", "6": "11001110100", "7": "11101101110", "8": "11101001100", "9": "11100101100", ":": "11100100110", ";": "11101100100", "<": "11100110100", "=": "11100110010", ">": "11011011000", "?": "11011000110", "@": "11000110110", "A": "10100011000", "B": "10001011000", "C": "10001000110", "D": "10110001000", "E": "10001101000", "F": "10001100010", "G": "11010001000", "H": "11000101000", "I": "11000100010", "J": "10110111000", "K": "10110001110", "L": "10001101110", "M": "10111011000", "N": "10111000110", "O": "10001110110", "P": "11101110110", "Q": "11010001110", "R": "11000101110", "S": "11011101000", "T": "11011100010", "U": "11011101110", "V": "11101011000", "W": "11101000110", "X": "11100010110", "Y": "11101101000", "Z": "11101100010", "[": "11100011010", "\\": "11101111010", "]": "11001000010", "^": "11110001010", "_": "10100110000", "`": "10100001100", "a": "10010110000", "b": "10010000110", "c": "10000101100", "d": "10000100110", "e": "10110010000", "f": "10110000100", "g": "10011010000", "h": "10011000010", "i": "10000110100", "j": "10000110010", "k": "11000010010", "l": "11001010000", "m": "11110111010", "n": "11000010100", "o": "10001111010", "p": "10100111100", "q": "10010111100", "r": "10010011110", "s": "10111100100", "t": "10011110100", "u": "10011110010", "v": "11110100100", "w": "11110010100", "x": "11110010010", "y": "11011011110", "z": "11011110110", "{": "11110110110", "|": "10101111000", "}": "10100011110", "~": "10001011110", "DEL": "10111101000", "FNC3": "10111100010", "FNC2": "11110101000", "Shift": "11110100010", "CodeC": "10111011110", "FNC4": "10111101110", "CodeA": "11101011110", "FNC1": "11110101110", "StartA": "11010000100", "StartB": "11010010000", "StartC": "11010011100", "Stop": "1100011101011" }; function u(t) { var e = "11010010000"; return e + i(t) + "1100011101011" } return function (t, e, r) { var n = document.querySelector(t); if (!n) throw new Error("Elemento SVG non trovato"); if ("svg" !== n.tagName.toLowerCase()) throw new Error("L'elemento target non è un <svg>"); n.innerHTML = ""; var o = u(e); for (var a = 0; a < o.length; a++) { if ("1" === o[a]) { var i = document.createElementNS("http://www.w3.org/2000/svg", "rect"); i.setAttribute("x", a * 2), i.setAttribute("y", "0"), i.setAttribute("width", "2"), i.setAttribute("height", r.height || 100), i.setAttribute("fill", r.lineColor || "#000"), n.appendChild(i) } } n.setAttribute("width", o.length * 2), n.setAttribute("height", r.height || 100) } }));</script>
 
-  <script>
-    function generaQRCode() {
-      const link = document.getElementById("linkInput").value.trim();
-      const qrcodeDiv = document.getElementById("qrcode");
-      qrcodeDiv.innerHTML = ""; // Pulisce eventuali QR precedenti
+    <script>function generaBarcode() {
+            const input = document.getElementById("barcodeInput").value.trim();
+            const svg = document.getElementById("barcodeSvg");
 
-      if (link !== "") {
-        new QRCode(qrcodeDiv, {
-          text: link,
-          width: 200,
-          height: 200,
-        });
-      } else {
-        alert("Inserisci un link valido.");
-      }
-    }
-  </script>
+            if (input === "") {
+                alert("Inserisci un valore valido.");
+                return;
+            }
 
-</body>
-</html>
-
-  </script>
+            JsBarcode("#barcodeSvg", input, {
+                lineColor: "#000",
+                height: 100
+            });
+        }</script>
 
 </body>
 </html>
+
+
+
